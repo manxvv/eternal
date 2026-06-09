@@ -18,17 +18,32 @@ const flowerTeas = [
 
 export default function TeaPage() {
   return (
-    <main className="bg-brand-cream min-h-screen pt-32">
-      {/* ── HEADER ────────────────────────────────── */}
-      <section className="py-20 text-center px-6 border-b border-brand-blue/5">
-        <div className="max-w-4xl mx-auto">
-          <p className="uppercase tracking-[0.4em] text-[10px] text-brand-gold mb-4 font-bold">
+    <main className="bg-brand-cream min-h-screen">
+      
+      {/* ── HEADER WITH BACKGROUND IMAGE ─────────────────── */}
+      <section className="relative pt-48 pb-32 bg-brand-blue text-center px-6 overflow-hidden">
+        
+        {/* FIX: Background Image Layer */}
+        <div 
+          className="absolute inset-0 z-0 opacity-40" 
+          style={{ 
+            backgroundImage: "url('/tea.png')", 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          }}
+        />
+        
+        {/* FIX: Deep Blue Gradient Overlay for Luxury Feel */}
+        <div className="absolute inset-0 z-1 bg-gradient-to-b from-brand-blue/80 via-brand-blue/40 to-brand-blue/90" />
+
+        <div className="max-w-4xl mx-auto relative z-10">
+          <p className="uppercase tracking-[0.4em] text-[10px] text-brand-gold mb-6 font-bold">
             The Eternal Collection
           </p>
-          <h1 className="font-cormorant text-6xl md:text-8xl text-brand-blue leading-tight mb-6">
+          <h1 className="font-cormorant text-6xl md:text-8xl text-white leading-tight mb-6">
             Teas
           </h1>
-          <p className="font-cormorant italic text-xl text-brand-blue/60 max-w-lg mx-auto">
+          <p className="font-cormorant italic text-xl text-white/70 max-w-lg mx-auto">
             From everyday indulgence to refined single-estate experiences.
           </p>
         </div>
@@ -51,7 +66,7 @@ export default function TeaPage() {
                   fill 
                   className="object-cover transition-transform duration-700 group-hover:scale-105" 
                 />
-                {/* Gradient Overlay */}
+                {/* Gradient Overlay on Cards */}
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/90 via-brand-blue/20 to-transparent" />
                 
                 {/* Content Overlay */}

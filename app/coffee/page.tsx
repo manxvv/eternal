@@ -30,11 +30,22 @@ export default function CoffeePage() {
   return (
     <main className="bg-brand-cream min-h-screen">
       
-      {/* ── HEADER ────────────────────────────────── */}
-      <section className="pt-40 pb-24 bg-brand-blue text-center px-6 relative overflow-hidden">
-        {/* Subtle Decorative element */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-brand-gold/20 to-transparent" />
+      {/* ── HEADER WITH BACKGROUND IMAGE ─────────────────── */}
+      <section className="relative pt-48 pb-32 bg-brand-blue text-center px-6 overflow-hidden">
         
+        {/* FIX: Background Image Layer */}
+        <div 
+          className="absolute inset-0 z-0 opacity-40" 
+          style={{ 
+            backgroundImage: "url('/coffee.png')", 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          }}
+        />
+        
+        {/* FIX: Deep Blue Gradient Overlay for Luxury Feel */}
+        <div className="absolute inset-0 z-1 bg-gradient-to-b from-brand-blue/80 via-brand-blue/40 to-brand-blue/90" />
+
         <div className="max-w-[1280px] mx-auto relative z-10">
           <p className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6">
             The Eternal Atelier
@@ -42,7 +53,7 @@ export default function CoffeePage() {
           <h1 className="font-cormorant text-6xl md:text-8xl text-white leading-tight mb-6">
             Coffee
           </h1>
-          <p className="font-cormorant italic text-xl text-white/50 max-w-lg mx-auto">
+          <p className="font-cormorant italic text-xl text-white/70 max-w-lg mx-auto">
             Crafted for unhurried mornings and meaningful conversations.
           </p>
         </div>
@@ -90,7 +101,7 @@ export default function CoffeePage() {
         </div>
       </section>
 
-      {/* ── BREW GUIDE (TECHNICAL ATELIER STYLE) ── */}
+      {/* ── BREW GUIDE ───────────────────────────── */}
       <section className="py-24 bg-white border-y border-brand-blue/5">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-20">
           <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
@@ -129,7 +140,7 @@ export default function CoffeePage() {
       {/* ── FOOTER CTA ───────────────────────────── */}
       <section className="py-32 bg-brand-cream text-center px-6">
         <div className="max-w-2xl mx-auto">
-          <h2 className="font-cormorant text-4xl text-brand-blue mb-8 leading-tight">
+          <h2 className="font-cormorant text-4xl text-brand-blue mb-8 leading-tight text-brand-blue">
             Elevate your workspace <br /> <span className="italic">or morning ritual.</span>
           </h2>
           <Link 

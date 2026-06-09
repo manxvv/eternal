@@ -16,16 +16,30 @@ export default function AccessoriesPage() {
   return (
     <main className="bg-brand-cream min-h-screen">
       
-      {/* ── HEADER ────────────────────────────────── */}
-      <section className="pt-40 pb-24 bg-white text-center px-6 border-b border-brand-blue/5">
-        <div className="max-w-[1280px] mx-auto">
+      {/* ── HEADER WITH BACKGROUND IMAGE ─────────────────── */}
+      <section className="relative pt-48 pb-32 bg-brand-blue text-center px-6 overflow-hidden">
+        
+        {/* FIX: Background Image Layer */}
+        <div 
+          className="absolute inset-0 z-0 opacity-40" 
+          style={{ 
+            backgroundImage: "url('/access.png')", 
+            backgroundSize: 'cover', 
+            backgroundPosition: 'center' 
+          }}
+        />
+        
+        {/* FIX: Deep Blue Gradient Overlay */}
+        <div className="absolute inset-0 z-1 bg-gradient-to-b from-brand-blue/80 via-brand-blue/40 to-brand-blue/90" />
+
+        <div className="max-w-[1280px] mx-auto relative z-10">
           <p className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6">
             Sustainable Atelier
           </p>
-          <h1 className="font-cormorant text-6xl md:text-8xl text-brand-blue leading-tight mb-6">
+          <h1 className="font-cormorant text-6xl md:text-8xl text-white leading-tight mb-6">
             Every piece, <br /> <span className="italic">a ritual.</span>
           </h1>
-          <p className="font-cormorant italic text-xl text-brand-blue/60 max-w-lg mx-auto">
+          <p className="font-cormorant italic text-xl text-white/70 max-w-lg mx-auto">
             Thoughtfully designed pieces that elevate every sip.
           </p>
         </div>
@@ -91,7 +105,7 @@ export default function AccessoriesPage() {
       {/* ── GIFTING CTA ───────────────────────────── */}
       <section className="py-32 bg-brand-cream text-center px-6">
         <div className="max-w-xl mx-auto">
-          <h2 className="font-cormorant text-4xl text-brand-blue mb-8">
+          <h2 className="font-cormorant text-4xl text-brand-blue mb-8 leading-tight">
             Create a custom <br /> <span className="italic">gifting set.</span>
           </h2>
           <p className="text-brand-blue/60 text-sm leading-relaxed mb-12">
