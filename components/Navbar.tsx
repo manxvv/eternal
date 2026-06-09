@@ -55,7 +55,7 @@ export default function Navbar() {
           <img
             src="/Eternal logo corp2-01.png"
             alt="Eternal Logo"
-            style={{ height: scrolled ? "40px" : "50px", transition: "all 0.4s" }}
+            style={{ height: scrolled ? "40px" : "70px",  transition: "all 0.4s" }}
           />
         </Link>
 

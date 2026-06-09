@@ -309,7 +309,7 @@ export default function Home() {
         >
           Tea · Coffee · Accessories
         </div>
-      </section>``
+      </section>
 
       {/* ── MARQUEE ──────────────────────────────────── */}
       <div
