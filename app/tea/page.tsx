@@ -1,53 +1,91 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 
 const teas = [
-  { name: "Everyday Assam Tea", desc: "Begin each morning with this bold, malty companion. Sourced from Assam's finest estates, it pairs beautifully with milk or enjoyed plain.", note: "Best served: With whole milk", image: "/everyday_assam_tea.jpeg" },
-  { name: "Majestic Assam Tea", desc: "Rich and full-bodied, from single-garden estates. A tea for moments that deserve a touch of ceremony.", note: "Best served: Black, steeped 4 min", image: "/majestic_assam_tea.jpeg" },
-  { name: "Heritage Masala Tea", desc: "A warming blend of hand-selected spices — cardamom, ginger, cinnamon — woven into a traditional black tea base.", note: "Best served: With full cream milk", image: null },
-  { name: "Rose Reverie", desc: "Delicate rose petals softened by a fine Darjeeling base. A tea for quiet afternoons and gentle reflection.", note: "Best served: Light, no milk", image: null },
-  { name: "Lemongrass Estate", desc: "Citrus-bright and naturally soothing. Fresh lemongrass from the Nilgiris blended with a clean green base.", note: "Best served: Hot or cold-brewed", image: null },
+  { name: "Everyday Assam Tea", price: "₹450", desc: "Begin each morning with this bold, malty companion. Sourced from Assam's finest estates.", note: "Best served: With whole milk", image: "/everyday_assam_tea_product_front.jpeg" },
+  { name: "Majestic Assam Tea", price: "₹850", desc: "Rich and full-bodied, from single-garden estates. A tea for moments that deserve a touch of ceremony.", note: "Best served: Black, steeped 4 min", image: "/majestic_assam_tea_product_front.jpeg" },
+  { name: "Heritage Masala Tea", price: "₹550", desc: "A warming blend of hand-selected spices — cardamom, ginger, cinnamon.", note: "Best served: With full cream milk", image: null },
+  { name: "Rose Reverie", price: "₹950", desc: "Delicate rose petals softened by a fine Darjeeling base.", note: "Best served: Light, no milk", image: null },
+  { name: "Lemongrass Estate", price: "₹650", desc: "Citrus-bright and naturally soothing. Fresh lemongrass from the Nilgiris.", note: "Best served: Hot or cold-brewed", image: null },
 ];
 
 const flowerTeas = [
-  { name: "Blue Empress", desc: "A rare and visually stunning infusion from butterfly pea flowers. Vivid indigo in the cup, naturally caffeine-free.", note: "Add lemon to watch it turn pink" },
-  { name: "Hibiscus Blossom", desc: "Vivid, tart, and deeply floral. Hibiscus flowers dried at their peak, bursting with colour and character.", note: "Best served: Chilled, with honey" },
+  { name: "Blue Empress", desc: "A rare blue infusion from butterfly pea flowers. Vivid indigo in the cup.", note: "Add lemon to watch it turn pink" },
+  { name: "Hibiscus Blossom", desc: "Vivid, tart, and deeply floral. Dried at their peak.", note: "Best served: Chilled, with honey" },
 ];
 
 export default function TeaPage() {
   return (
-    <>
-      {/* Header */}
-      <div style={{ paddingTop: 160, paddingBottom: 80, backgroundColor: "#F5EDE0", textAlign: "center" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Our Collections</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(48px, 7vw, 80px)", fontWeight: 300, color: "var(--charcoal)", letterSpacing: "-0.01em", marginBottom: 20 }}>
+    <main className="bg-brand-cream min-h-screen pt-32">
+      {/* ── HEADER ────────────────────────────────── */}
+      <section className="py-20 text-center px-6 border-b border-brand-blue/5">
+        <div className="max-w-4xl mx-auto">
+          <p className="uppercase tracking-[0.4em] text-[10px] text-brand-gold mb-4 font-bold">
+            The Eternal Collection
+          </p>
+          <h1 className="font-cormorant text-6xl md:text-8xl text-brand-blue leading-tight mb-6">
             Teas
           </h1>
-          <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 18, fontStyle: "italic", color: "var(--charcoal)", opacity: 0.65 }}>
-            From everyday indulgence to refined experiences.
+          <p className="font-cormorant italic text-xl text-brand-blue/60 max-w-lg mx-auto">
+            From everyday indulgence to refined single-estate experiences.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Featured teas with real images */}
-      <section style={{ padding: "80px 0", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow">Featured Teas</p>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 2, marginTop: 32 }}>
-            {teas.filter(t => t.image).map((tea) => (
-              <div key={tea.name} style={{ position: "relative", overflow: "hidden" }} className="img-zoom">
-                <div style={{ position: "relative", aspectRatio: "4/3" }}>
-                  <Image src={tea.image!} alt={tea.name} fill style={{ objectFit: "cover" }} sizes="50vw" />
-                  <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(86,84,72,0.8) 0%, transparent 60%)" }} />
-                  <div style={{ position: "absolute", bottom: 0, left: 0, padding: "32px 36px" }}>
-                    <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 28, fontWeight: 300, color: "var(--cream)", marginBottom: 8, lineHeight: 1.2 }}>
-                      {tea.name}
-                    </p>
-                    <p style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", fontStyle: "italic" }}>
-                      {tea.note}
-                    </p>
+      {/* ── FEATURED TEAS (VISUAL GRID) ────────────── */}
+      <section className="py-24 px-6 lg:px-20 max-w-[1400px] mx-auto">
+        <div className="flex items-center gap-4 mb-12">
+          <div className="h-[1px] w-12 bg-brand-gold"></div>
+          <p className="uppercase tracking-widest text-[10px] font-bold text-brand-blue">Featured Selection</p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {teas.filter(t => t.image).map((tea) => (
+            <div key={tea.name} className="group relative overflow-hidden bg-white">
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image 
+                  src={tea.image!} 
+                  alt={tea.name} 
+                  fill 
+                  className="object-cover transition-transform duration-700 group-hover:scale-105" 
+                />
+                {/* Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-blue/90 via-brand-blue/20 to-transparent" />
+                
+                {/* Content Overlay */}
+                <div className="absolute bottom-0 left-0 p-10 w-full flex justify-between items-end">
+                  <div>
+                    <h3 className="font-cormorant text-3xl text-white mb-2">{tea.name}</h3>
+                    <p className="text-brand-gold text-[10px] uppercase tracking-widest italic">{tea.note}</p>
                   </div>
+                  <button className="bg-brand-gold text-brand-blue px-6 py-3 text-[10px] font-bold uppercase tracking-widest hover:bg-white transition-colors">
+                    Shop Now — {tea.price}
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── PRODUCT LIST (CLEAN GRID) ──────────────── */}
+      <section className="py-24 bg-white border-y border-brand-blue/5 px-6 lg:px-20">
+        <div className="max-w-[1400px] mx-auto">
+          <p className="uppercase tracking-widest text-[10px] font-bold text-brand-gold mb-12">Single Estate & Blended</p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-brand-blue/10 border border-brand-blue/10">
+            {teas.map((tea, i) => (
+              <div key={tea.name} className="bg-white p-12 hover:bg-brand-cream transition-colors group">
+                <span className="font-dmsans text-[10px] text-brand-gold font-bold">0{i + 1}</span>
+                <h4 className="font-cormorant text-2xl text-brand-blue mt-4 mb-4 group-hover:text-brand-gold transition-colors">{tea.name}</h4>
+                <p className="text-brand-blue/60 text-sm leading-relaxed mb-8 h-12 overflow-hidden">{tea.desc}</p>
+                <div className="flex justify-between items-center">
+                  <span className="text-brand-blue font-bold text-sm">{tea.price}</span>
+                  <button className="text-[10px] uppercase tracking-widest text-brand-blue font-bold border-b border-brand-gold pb-1">
+                    Add to Cart +
+                  </button>
                 </div>
               </div>
             ))}
@@ -55,65 +93,47 @@ export default function TeaPage() {
         </div>
       </section>
 
-      {/* Tea list */}
-      <section style={{ padding: "80px 0", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow">Single Estate & Blended Teas</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))", gap: 1, border: "1px solid var(--mist)", marginTop: 32 }}>
-            {teas.map((tea, i) => (
-              <div
-                key={tea.name}
-                style={{ padding: "40px 36px", borderRight: "1px solid var(--mist)", borderBottom: "1px solid var(--mist)", backgroundColor: "var(--cream)", transition: "background-color 0.3s", cursor: "pointer" }}
-              >
-                <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, letterSpacing: "0.3em", color: "var(--gold)", textTransform: "uppercase" }}>
-                  0{i + 1}
-                </span>
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 24, fontWeight: 400, color: "var(--charcoal)", margin: "12px 0 12px", lineHeight: 1.2 }}>
-                  {tea.name}
-                </p>
-                <p style={{ fontSize: 13, lineHeight: 1.7, color: "var(--charcoal)", opacity: 0.6, marginBottom: 20 }}>{tea.desc}</p>
-                <p style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)" }}>{tea.note}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Flower teas */}
-      <section id="flower" style={{ padding: "80px 0", backgroundColor: "var(--charcoal)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, letterSpacing: "0.35em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 16 }}>Flower Teas</p>
-          <h2 style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(28px, 3.5vw, 44px)", fontWeight: 300, color: "var(--cream)", marginBottom: 60 }}>
-            Delicate infusions inspired by nature.
+      {/* ── FLOWER TEAS (DARK LUXURY SECTION) ─────── */}
+      <section id="flower" className="py-32 bg-brand-blue text-brand-cream px-6 lg:px-20 relative overflow-hidden">
+        {/* Background Decoration */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl"></div>
+        
+        <div className="max-w-[1400px] mx-auto relative z-10">
+          <p className="uppercase tracking-[0.4em] text-[10px] text-brand-gold mb-6 font-bold">Nature's Artistry</p>
+          <h2 className="font-cormorant text-4xl md:text-6xl mb-16 max-w-2xl leading-tight">
+            Delicate infusions <br /> <span className="italic text-brand-gold">inspired by nature.</span>
           </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 24 }}>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             {flowerTeas.map((tea) => (
-              <div key={tea.name} style={{ padding: "48px 40px", border: "1px solid rgba(255,250,244,0.12)", position: "relative", overflow: "hidden" }}>
-                <div style={{ position: "absolute", top: 0, right: 0, width: 100, height: 100, borderRadius: "50%", backgroundColor: tea.name === "Blue Empress" ? "rgba(130,160,220,0.12)" : "rgba(220,100,120,0.12)", transform: "translate(30%, -30%)" }} />
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 28, fontWeight: 300, color: "var(--cream)", marginBottom: 16 }}>{tea.name}</p>
-                <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(255,250,244,0.55)", marginBottom: 24 }}>{tea.desc}</p>
-                <p style={{ fontSize: 11, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--gold)", fontStyle: "italic" }}>{tea.note}</p>
+              <div key={tea.name} className="border border-white/10 p-12 relative group hover:border-brand-gold/50 transition-colors">
+                <div className="absolute top-6 right-8 text-brand-gold/20 font-cormorant text-6xl">✿</div>
+                <h3 className="font-cormorant text-3xl text-brand-gold mb-4">{tea.name}</h3>
+                <p className="text-white/50 text-sm leading-relaxed mb-8 max-w-sm">{tea.desc}</p>
+                <p className="text-[10px] uppercase tracking-widest text-brand-gold italic opacity-80">{tea.note}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section style={{ padding: "80px 0", backgroundColor: "var(--cream)", textAlign: "center" }}>
-        <div style={{ maxWidth: 600, margin: "0 auto", padding: "0 40px" }}>
-          <h2 style={{ fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, color: "var(--charcoal)", marginBottom: 20 }}>
-            Ready to order?
-          </h2>
-          <p style={{ fontSize: 14, color: "var(--charcoal)", opacity: 0.6, lineHeight: 1.8, marginBottom: 36 }}>
-            Browse all available teas and accessories in our store.
+      {/* ── CTA SECTION ───────────────────────────── */}
+      <section className="py-32 bg-brand-cream text-center px-6">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-cormorant text-4xl md:text-5xl text-brand-blue mb-8">Ready to curate your ritual?</h2>
+          <p className="text-brand-blue/60 mb-12 text-sm leading-loose">
+            Whether it's the bold malt of Assam or the gentle bloom of flower teas, find the blend that speaks to your moment of stillness.
           </p>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center", flexWrap: "wrap" }}>
-            <Link href="/products" className="btn-primary">Shop All Products</Link>
-            <Link href="/bulk" className="btn-gold">Enquire About Gifting</Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/products" className="bg-brand-blue text-white px-10 py-4 uppercase tracking-widest text-xs hover:bg-brand-blue/90 transition-all">
+              Shop All Products
+            </Link>
+            <Link href="/bulk" className="border border-brand-blue text-brand-blue px-10 py-4 uppercase tracking-widest text-xs hover:bg-brand-blue hover:text-white transition-all">
+              Gifting Inquiries
+            </Link>
           </div>
         </div>
       </section>
-    </>
+    </main>
   );
 }

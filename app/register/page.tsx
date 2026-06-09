@@ -25,159 +25,112 @@ export default function RegisterPage() {
     const ok = await register(name, email, password);
     setLoading(false);
     if (ok) {
-      router.push("/products");
+      router.push("/tea"); // Redirect to shop
     } else {
       setError("An account with this email already exists.");
     }
   };
 
-  const inputStyle = {
-    width: "100%",
-    padding: "14px 16px",
-    border: "1px solid var(--mist)",
-    backgroundColor: "transparent",
-    fontFamily: "var(--font-dm-sans)",
-    fontSize: 13,
-    color: "var(--charcoal)",
-    outline: "none",
-    transition: "border-color 0.3s",
-    boxSizing: "border-box" as const,
-  };
-
-  const labelStyle = {
-    display: "block",
-    fontFamily: "var(--font-dm-sans)",
-    fontSize: 9,
-    letterSpacing: "0.25em",
-    textTransform: "uppercase" as const,
-    color: "var(--charcoal)",
-    opacity: 0.6,
-    marginBottom: 8,
-  };
-
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        backgroundColor: "#F5EDE0",
-        padding: "100px 40px",
-      }}
-    >
-      <div
-        style={{
-          width: "100%",
-          maxWidth: 440,
-          backgroundColor: "var(--cream)",
-          border: "1px solid var(--mist)",
-          padding: "56px 48px",
-        }}
-      >
-        <div style={{ textAlign: "center", marginBottom: 48 }}>
-          <Link href="/">
-            <img src="/Eternal logo corp2-01.png" alt="Eternal" style={{ height: 48, marginBottom: 32, display: "inline-block" }} />
+    <main className="min-h-screen bg-brand-cream flex items-center justify-center p-6 lg:p-20">
+      {/* ── REGISTER CARD ── */}
+      <div className="w-full max-w-[480px] bg-white border border-brand-blue/5 p-10 lg:p-16 shadow-xl shadow-brand-blue/5 animate-fade-in">
+        
+        {/* Logo & Header */}
+        <div className="text-center mb-12">
+          <Link href="/" className="inline-block mb-8">
+            <img 
+              src="/Eternal logo corp2-01.png" 
+              alt="Eternal" 
+              className="h-12 w-auto mx-auto" 
+            />
           </Link>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Join Eternal</p>
-          <h1
-            style={{
-              fontFamily: "var(--font-cormorant)",
-              fontSize: 36,
-              fontWeight: 300,
-              color: "var(--charcoal)",
-              margin: 0,
-            }}
-          >
+          <p className="text-brand-gold uppercase tracking-[0.3em] text-[10px] font-bold mb-4">
+            Join the Atelier
+          </p>
+          <h1 className="font-cormorant text-4xl text-brand-blue">
             Create Account
           </h1>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Full Name</label>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Name Field */}
+          <div className="space-y-2">
+            <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">
+              Full Name
+            </label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="Your name"
+              placeholder="E.g. Julianne Smith"
               required
-              style={inputStyle}
+              className="w-full px-4 py-4 bg-transparent border border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors placeholder:text-brand-blue/20"
             />
           </div>
 
-          <div style={{ marginBottom: 20 }}>
-            <label style={labelStyle}>Email Address</label>
+          {/* Email Field */}
+          <div className="space-y-2">
+            <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">
+              Email Address
+            </label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="your@email.com"
+              placeholder="hello@eternaltea.in"
               required
-              style={inputStyle}
+              className="w-full px-4 py-4 bg-transparent border border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors placeholder:text-brand-blue/20"
             />
           </div>
 
-          <div style={{ marginBottom: 32 }}>
-            <label style={labelStyle}>Password</label>
+          {/* Password Field */}
+          <div className="space-y-2">
+            <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">
+              Password
+            </label>
             <input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Minimum 6 characters"
+              placeholder="At least 6 characters"
               required
-              style={inputStyle}
+              className="w-full px-4 py-4 bg-transparent border border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors placeholder:text-brand-blue/20"
             />
           </div>
 
+          {/* Error Message */}
           {error && (
-            <p
-              style={{
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: 12,
-                color: "#B05050",
-                marginBottom: 20,
-                padding: "12px 16px",
-                backgroundColor: "rgba(176,80,80,0.06)",
-                border: "1px solid rgba(176,80,80,0.2)",
-              }}
-            >
+            <div className="bg-red-50 border border-red-100 text-red-800 text-[11px] px-4 py-3 font-medium">
               {error}
-            </p>
+            </div>
           )}
 
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={loading}
-            style={{
-              width: "100%",
-              padding: "16px",
-              border: "1px solid var(--charcoal)",
-              backgroundColor: "var(--charcoal)",
-              color: "var(--cream)",
-              fontFamily: "var(--font-dm-sans)",
-              fontSize: 10,
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              cursor: loading ? "not-allowed" : "pointer",
-              opacity: loading ? 0.7 : 1,
-              transition: "all 0.3s",
-            }}
+            className={`w-full py-5 px-4 bg-brand-blue text-brand-gold font-dmsans text-[11px] uppercase tracking-[0.2em] font-bold transition-all
+              ${loading ? "opacity-70 cursor-not-allowed" : "hover:bg-brand-blue/90 hover:shadow-lg hover:shadow-brand-blue/10"}
+            `}
           >
-            {loading ? "Creating account…" : "Create Account"}
+            {loading ? "Establishing Account..." : "Create Account"}
           </button>
         </form>
 
-        <div style={{ textAlign: "center", marginTop: 32 }}>
-          <hr style={{ border: "none", borderTop: "1px solid var(--mist)", marginBottom: 24 }} />
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 12, color: "var(--charcoal)", opacity: 0.6 }}>
-            Already have an account?{" "}
-            <Link href="/login" style={{ color: "var(--charcoal)", opacity: 1, textDecoration: "underline", textUnderlineOffset: 3 }}>
-              Sign in
+        {/* Footer Links */}
+        <div className="mt-12 text-center pt-8 border-t border-brand-blue/5">
+          <p className="text-xs text-brand-blue/50 font-dmsans">
+            Already a member?{" "}
+            <Link 
+              href="/login" 
+              className="text-brand-blue font-bold border-b border-brand-gold hover:text-brand-gold transition-colors pb-0.5 ml-1"
+            >
+              Sign In
             </Link>
           </p>
         </div>
       </div>
-    </div>
+    </main>
   );
 }

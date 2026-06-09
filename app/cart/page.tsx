@@ -11,221 +11,178 @@ export default function CartPage() {
   const { items, removeItem, updateQty, clearCart, totalPrice } = useCart();
   const [ordered, setOrdered] = useState(false);
 
+  // ── 1. UNAUTHORIZED STATE ──
   if (!user) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#F5EDE0", paddingTop: 120 }}>
-        <div style={{ textAlign: "center", padding: "0 40px" }}>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Your Cart</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: 48, fontWeight: 300, color: "var(--charcoal)", marginBottom: 20 }}>
-            Sign in to view your cart
-          </h1>
-          <p style={{ fontSize: 14, color: "var(--charcoal)", opacity: 0.6, marginBottom: 36 }}>
-            Please sign in or create an account to continue.
+      <div className="min-h-screen flex items-center justify-center bg-brand-cream pt-20 px-6">
+        <div className="text-center max-w-md">
+          <p className="text-brand-gold uppercase tracking-[0.3em] text-[10px] font-bold mb-4">Your Selection</p>
+          <h1 className="font-cormorant text-5xl text-brand-blue mb-6">Sign in to view cart</h1>
+          <p className="text-brand-blue/60 text-sm mb-10 leading-relaxed">
+            Your curated collection awaits. Please sign in to manage your teas and proceed to checkout.
           </p>
-          <div style={{ display: "flex", gap: 16, justifyContent: "center" }}>
-            <Link href="/login" className="btn-primary">Sign In</Link>
-            <Link href="/register" className="btn-gold">Create Account</Link>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/login" className="bg-brand-blue text-brand-gold px-10 py-4 uppercase tracking-widest text-[11px] font-bold">
+              Sign In
+            </Link>
+            <Link href="/register" className="border border-brand-blue text-brand-blue px-10 py-4 uppercase tracking-widest text-[11px] font-bold hover:bg-brand-blue hover:text-white transition-all">
+              Join the Atelier
+            </Link>
           </div>
         </div>
       </div>
     );
   }
 
+  // ── 2. SUCCESS STATE (ORDER PLACED) ──
   if (ordered) {
     return (
-      <div style={{ minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: "#F5EDE0", paddingTop: 120 }}>
-        <div style={{ textAlign: "center", maxWidth: 500, padding: "0 40px" }}>
-          <div style={{ width: 56, height: 56, border: "1px solid var(--gold)", borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 32px" }}>
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--gold)" strokeWidth="1.5">
+      <div className="min-h-screen flex items-center justify-center bg-brand-cream pt-20 px-6">
+        <div className="text-center max-w-lg animate-fade-in">
+          <div className="w-16 h-16 border border-brand-gold rounded-full flex items-center justify-center mx-auto mb-8">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EAD292" strokeWidth="1.5">
               <polyline points="20 6 9 17 4 12" />
             </svg>
           </div>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Order Placed</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: 44, fontWeight: 300, color: "var(--charcoal)", marginBottom: 16 }}>
-            Thank you, {user.name.split(" ")[0]}.
-          </h1>
-          <p style={{ fontSize: 14, color: "var(--charcoal)", opacity: 0.6, lineHeight: 1.8, marginBottom: 40 }}>
-            Your order has been received. We'll send a confirmation to {user.email} shortly. Your teas are on their way.
+          <p className="text-brand-gold uppercase tracking-[0.3em] text-[10px] font-bold mb-4">Order Confirmed</p>
+          <h1 className="font-cormorant text-5xl text-brand-blue mb-6">Thank you, {user.name.split(" ")[0]}.</h1>
+          <p className="text-brand-blue/60 text-sm leading-loose mb-10">
+            Your order has been received at the atelier. A confirmation has been sent to <span className="text-brand-blue font-bold">{user.email}</span>. Your ritual begins soon.
           </p>
-          <Link href="/products" className="btn-primary">Continue Shopping</Link>
+          <Link href="/products" className="bg-brand-blue text-brand-gold px-12 py-5 uppercase tracking-widest text-[11px] font-bold shadow-xl shadow-brand-blue/10">
+            Continue Exploration
+          </Link>
         </div>
       </div>
     );
   }
 
   return (
-    <>
-      <div style={{ paddingTop: 140, paddingBottom: 60, backgroundColor: "#F5EDE0", textAlign: "center" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Your Selection</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 300, color: "var(--charcoal)", margin: 0 }}>
-            Cart
-          </h1>
+    <main className="bg-brand-cream min-h-screen">
+      {/* ── HEADER ── */}
+      <section className="pt-40 pb-20 bg-brand-blue text-center px-6">
+        <div className="max-w-[1280px] mx-auto">
+          <p className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6">Atelier Review</p>
+          <h1 className="font-cormorant text-6xl md:text-7xl text-white">Your Cart</h1>
         </div>
-      </div>
+      </section>
 
-      <section style={{ padding: "60px 0 100px", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 40px" }}>
-          {items.length === 0 ? (
-            <div style={{ textAlign: "center", padding: "80px 0" }}>
-              <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 28, fontWeight: 300, color: "var(--charcoal)", opacity: 0.5, marginBottom: 32 }}>
-                Your cart is empty.
-              </p>
-              <Link href="/products" className="btn-primary">Discover Products</Link>
-            </div>
-          ) : (
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 360px", gap: 48, alignItems: "start" }}>
-              {/* Items */}
-              <div>
-                <div style={{ borderTop: "1px solid var(--mist)" }}>
-                  {items.map((item) => (
-                    <div
-                      key={item.id}
-                      style={{
-                        display: "grid",
-                        gridTemplateColumns: "80px 1fr auto",
-                        gap: 24,
-                        padding: "28px 0",
-                        borderBottom: "1px solid var(--mist)",
-                        alignItems: "center",
-                      }}
-                    >
-                      {/* Image */}
-                      <div style={{ position: "relative", width: 80, height: 80, overflow: "hidden", flexShrink: 0 }}>
-                        <Image src={item.image} alt={item.name} fill style={{ objectFit: "cover" }} sizes="80px" />
-                      </div>
+      <section className="py-20 px-6 lg:px-20 max-w-[1280px] mx-auto">
+        {items.length === 0 ? (
+          // ── EMPTY STATE ──
+          <div className="text-center py-20">
+            <h2 className="font-cormorant text-3xl text-brand-blue/30 italic mb-8">Your cart is currently empty.</h2>
+            <Link href="/products" className="bg-brand-blue text-brand-gold px-12 py-5 uppercase tracking-widest text-[11px] font-bold">
+              Shop the Collection
+            </Link>
+          </div>
+        ) : (
+          // ── CART GRID ──
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+            
+            {/* Items Column (Left) */}
+            <div className="lg:col-span-8">
+              <div className="border-t border-brand-blue/10">
+                {items.map((item) => (
+                  <div key={item.id} className="grid grid-cols-[100px_1fr_auto] gap-8 py-10 border-b border-brand-blue/10 items-center">
+                    {/* Image */}
+                    <div className="relative aspect-square bg-white overflow-hidden shadow-sm">
+                      <Image src={item.image} alt={item.name} fill className="object-cover" />
+                    </div>
 
-                      {/* Info */}
-                      <div>
-                        <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 20, fontWeight: 400, color: "var(--charcoal)", marginBottom: 4 }}>
-                          {item.name}
-                        </p>
-                        <p style={{ fontSize: 12, color: "var(--charcoal)", opacity: 0.55, marginBottom: 16, fontFamily: "var(--font-dm-sans)" }}>
-                          ₹{item.price.toLocaleString()} each
-                        </p>
-                        {/* Qty */}
-                        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-                          <button
+                    {/* Info */}
+                    <div>
+                      <h3 className="font-cormorant text-2xl text-brand-blue mb-1">{item.name}</h3>
+                      <p className="text-[11px] font-bold text-brand-gold uppercase tracking-widest mb-6">
+                        ₹{item.price.toLocaleString()}
+                      </p>
+                      
+                      {/* Qty Controls */}
+                      <div className="flex items-center gap-6">
+                        <div className="flex items-center border border-brand-blue/10">
+                          <button 
                             onClick={() => updateQty(item.id, item.quantity - 1)}
-                            style={{ width: 28, height: 28, border: "1px solid var(--mist)", background: "none", cursor: "pointer", fontSize: 14, color: "var(--charcoal)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                            className="w-10 h-10 flex items-center justify-center text-brand-blue hover:bg-brand-blue/5 transition-colors"
                           >
                             −
                           </button>
-                          <span style={{ fontFamily: "var(--font-dm-sans)", fontSize: 13, color: "var(--charcoal)", minWidth: 20, textAlign: "center" }}>
-                            {item.quantity}
-                          </span>
-                          <button
+                          <span className="w-10 text-center text-xs font-bold text-brand-blue">{item.quantity}</span>
+                          <button 
                             onClick={() => updateQty(item.id, item.quantity + 1)}
-                            style={{ width: 28, height: 28, border: "1px solid var(--mist)", background: "none", cursor: "pointer", fontSize: 14, color: "var(--charcoal)", display: "flex", alignItems: "center", justifyContent: "center" }}
+                            className="w-10 h-10 flex items-center justify-center text-brand-blue hover:bg-brand-blue/5 transition-colors"
                           >
                             +
                           </button>
-                          <button
-                            onClick={() => removeItem(item.id)}
-                            style={{ background: "none", border: "none", cursor: "pointer", fontSize: 10, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--charcoal)", opacity: 0.35, fontFamily: "var(--font-dm-sans)", marginLeft: 8 }}
-                          >
-                            Remove
-                          </button>
                         </div>
+                        <button 
+                          onClick={() => removeItem(item.id)}
+                          className="text-[10px] uppercase tracking-widest text-red-800/40 hover:text-red-800 font-bold underline underline-offset-4"
+                        >
+                          Remove
+                        </button>
                       </div>
-
-                      {/* Price */}
-                      <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 22, fontWeight: 400, color: "var(--charcoal)", textAlign: "right" }}>
-                        ₹{(item.price * item.quantity).toLocaleString()}
-                      </p>
                     </div>
-                  ))}
-                </div>
+
+                    {/* Subtotal per item */}
+                    <p className="font-cormorant text-2xl text-brand-blue">
+                      ₹{(item.price * item.quantity).toLocaleString()}
+                    </p>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              {/* Summary */}
-              <div
-                style={{
-                  border: "1px solid var(--mist)",
-                  padding: "36px 32px",
-                  position: "sticky",
-                  top: 100,
-                }}
-              >
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 22, fontWeight: 400, color: "var(--charcoal)", marginBottom: 28 }}>
-                  Order Summary
-                </p>
+            {/* Summary Sidebar (Right) */}
+            <div className="lg:col-span-4 sticky top-32">
+              <div className="bg-white p-10 border border-brand-blue/5 shadow-2xl shadow-brand-blue/5">
+                <h4 className="font-cormorant text-2xl text-brand-blue mb-8 border-b border-brand-blue/5 pb-4">
+                  Summary
+                </h4>
 
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 12 }}>
-                  <span style={{ fontSize: 12, color: "var(--charcoal)", opacity: 0.6, fontFamily: "var(--font-dm-sans)" }}>Subtotal</span>
-                  <span style={{ fontFamily: "var(--font-cormorant)", fontSize: 18, color: "var(--charcoal)" }}>₹{totalPrice.toLocaleString()}</span>
-                </div>
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 24 }}>
-                  <span style={{ fontSize: 12, color: "var(--charcoal)", opacity: 0.6, fontFamily: "var(--font-dm-sans)" }}>Shipping</span>
-                  <span style={{ fontSize: 12, color: "var(--gold)", fontFamily: "var(--font-dm-sans)" }}>
-                    {totalPrice >= 999 ? "Free" : "₹99"}
-                  </span>
+                <div className="space-y-4 mb-8">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-brand-blue/50 uppercase tracking-widest text-[10px] font-bold">Subtotal</span>
+                    <span className="text-brand-blue font-medium">₹{totalPrice.toLocaleString()}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-brand-blue/50 uppercase tracking-widest text-[10px] font-bold">Shipping</span>
+                    <span className={`font-bold ${totalPrice >= 999 ? 'text-green-700' : 'text-brand-gold'}`}>
+                      {totalPrice >= 999 ? "Complimentary" : "₹99"}
+                    </span>
+                  </div>
                 </div>
 
-                <hr style={{ border: "none", borderTop: "1px solid var(--mist)", marginBottom: 20 }} />
+                {totalPrice < 999 && (
+                  <div className="bg-brand-gold/5 border border-brand-gold/20 p-4 mb-8 text-center">
+                    <p className="text-[10px] text-brand-blue uppercase tracking-widest font-bold">
+                      Add ₹{(999 - totalPrice).toLocaleString()} more for free shipping
+                    </p>
+                  </div>
+                )}
 
-                <div style={{ display: "flex", justifyContent: "space-between", marginBottom: 32 }}>
-                  <span style={{ fontSize: 12, color: "var(--charcoal)", fontFamily: "var(--font-dm-sans)", letterSpacing: "0.1em", textTransform: "uppercase" }}>Total</span>
-                  <span style={{ fontFamily: "var(--font-cormorant)", fontSize: 26, color: "var(--charcoal)" }}>
+                <div className="flex justify-between items-end border-t border-brand-blue/5 pt-6 mb-10">
+                  <span className="text-brand-blue uppercase tracking-[0.2em] text-[11px] font-bold">Total</span>
+                  <span className="font-cormorant text-4xl text-brand-blue">
                     ₹{(totalPrice + (totalPrice >= 999 ? 0 : 99)).toLocaleString()}
                   </span>
                 </div>
 
-                {totalPrice < 999 && (
-                  <p style={{ fontSize: 11, color: "var(--gold)", fontFamily: "var(--font-dm-sans)", marginBottom: 20, textAlign: "center" }}>
-                    Add ₹{(999 - totalPrice).toLocaleString()} more for free shipping
-                  </p>
-                )}
-
                 <button
                   onClick={() => { clearCart(); setOrdered(true); }}
-                  style={{
-                    width: "100%",
-                    padding: "16px",
-                    border: "none",
-                    backgroundColor: "var(--charcoal)",
-                    color: "var(--cream)",
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: 10,
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                    marginBottom: 12,
-                  }}
+                  className="w-full bg-brand-blue text-brand-gold py-5 uppercase tracking-[0.2em] text-[11px] font-bold hover:bg-brand-blue/90 shadow-xl shadow-brand-blue/10 transition-all mb-4"
                 >
-                  Place Order
+                  Confirm Order
                 </button>
 
-                <Link
-                  href="/products"
-                  style={{
-                    display: "block",
-                    width: "100%",
-                    padding: "14px",
-                    border: "1px solid var(--mist)",
-                    backgroundColor: "transparent",
-                    color: "var(--charcoal)",
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: 10,
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    cursor: "pointer",
-                    textDecoration: "none",
-                    textAlign: "center",
-                    opacity: 0.6,
-                  }}
-                >
-                  Continue Shopping
-                </Link>
-
-                <p style={{ fontSize: 10, color: "var(--charcoal)", opacity: 0.4, textAlign: "center", marginTop: 20, fontFamily: "var(--font-dm-sans)", lineHeight: 1.6 }}>
-                  Free returns · Secure checkout · Crafted in India
+                <p className="text-[9px] text-brand-blue/30 uppercase tracking-widest text-center leading-relaxed">
+                  Secure Checkout · Artisanal Packaging <br /> Worldwide Delivery available
                 </p>
               </div>
             </div>
-          )}
-        </div>
+
+          </div>
+        )}
       </section>
-    </>
+    </main>
   );
 }

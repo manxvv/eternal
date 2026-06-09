@@ -1,62 +1,83 @@
+"use client";
+
+import React from "react";
+
+const offerings = [
+  { 
+    title: "Premium Tea Collections", 
+    desc: "Curated selections from our full range, presented in beautiful, sustainable packaging worthy of the recipient." 
+  },
+  { 
+    title: "Sustainable Accessories", 
+    desc: "Handpicked pieces — from chai glasses to serving trays — that carry the Eternal mark of quiet intention." 
+  },
+  { 
+    title: "Custom Gifting Experiences", 
+    desc: "We work with you to create bespoke combinations, branded gifting sets, and personalised notes." 
+  },
+];
+
+const occasions = [
+  "Client Gifting", "Team Appreciation", "Diwali & Festive", 
+  "Weddings & Ceremonies", "Product Launches", "Year-End Gifting", 
+  "Welcome Kits", "Board Meetings"
+];
+
 export default function BulkPage() {
   return (
-    <>
-      {/* Header */}
-      <div style={{ paddingTop: 160, paddingBottom: 80, backgroundColor: "var(--charcoal)", textAlign: "center" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, letterSpacing: "0.35em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 16 }}>
-            Bulk & Corporate Gifting
+    <main className="bg-brand-cream min-h-screen">
+      
+      {/* ── HEADER SECTION ────────────────────────── */}
+      <section className="pt-40 pb-24 bg-brand-blue text-center px-6 relative overflow-hidden">
+        {/* Decorative Background Texture */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute inset-0 bg-cover bg-center mix-blend-overlay" />
+        </div>
+
+        <div className="max-w-[1280px] mx-auto relative z-10">
+          <p className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6">
+            Bespoke Services
           </p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(40px, 6vw, 72px)", fontWeight: 300, color: "var(--cream)", marginBottom: 20, lineHeight: 1.1 }}>
-            Gift the art of
-            <br />
-            slow living.
+          <h1 className="font-cormorant text-6xl md:text-8xl text-white leading-[1.1] mb-8 max-w-4xl mx-auto">
+            Gift the art of <br /> <span className="italic text-brand-gold">slow living.</span>
           </h1>
-          <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 18, fontStyle: "italic", color: "rgba(255,250,244,0.5)", maxWidth: 500, margin: "0 auto" }}>
+          <p className="font-cormorant italic text-xl text-white/50 max-w-lg mx-auto">
             Curated gifting solutions for clients, teams, and every occasion that matters.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* What we offer */}
-      <section style={{ padding: "100px 0", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow">What We Offer</p>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 32, marginTop: 40 }}>
-            {[
-              { title: "Premium Tea Collections", desc: "Curated selections from our full range, presented in beautiful, sustainable packaging worthy of the recipient." },
-              { title: "Sustainable Accessories", desc: "Handpicked pieces — from chai glasses to serving trays — that carry the Eternal mark of quiet intention." },
-              { title: "Custom Gifting Experiences", desc: "We work with you to create bespoke combinations, branded gifting sets, and personalised notes for every occasion." },
-            ].map((item) => (
-              <div key={item.title} style={{ padding: "48px 40px", border: "1px solid var(--mist)" }}>
-                <div style={{ width: 32, height: 1, backgroundColor: "var(--gold)", marginBottom: 28 }} />
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 24, fontWeight: 400, color: "var(--charcoal)", marginBottom: 16, lineHeight: 1.2 }}>
-                  {item.title}
-                </p>
-                <p style={{ fontSize: 13, lineHeight: 1.8, color: "var(--charcoal)", opacity: 0.6 }}>{item.desc}</p>
-              </div>
-            ))}
-          </div>
+      {/* ── OFFERINGS GRID ────────────────────────── */}
+      <section className="py-24 px-6 lg:px-20 max-w-[1280px] mx-auto">
+        <div className="flex items-center gap-4 mb-16">
+          <div className="h-[1px] w-12 bg-brand-gold"></div>
+          <p className="uppercase tracking-widest text-[10px] font-bold text-brand-blue">What We Offer</p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {offerings.map((item) => (
+            <div key={item.title} className="bg-white p-12 border border-brand-blue/5 hover:shadow-2xl hover:shadow-brand-blue/5 transition-all group">
+              <div className="w-10 h-[1px] bg-brand-gold mb-8 group-hover:w-20 transition-all duration-500" />
+              <h3 className="font-cormorant text-2xl text-brand-blue mb-6 leading-tight uppercase tracking-wide">
+                {item.title}
+              </h3>
+              <p className="text-brand-blue/60 text-sm leading-relaxed font-dmsans">
+                {item.desc}
+              </p>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Occasions */}
-      <section style={{ padding: "80px 0", backgroundColor: "#F5EDE0" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow">Occasions We Serve</p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: 12, marginTop: 32 }}>
-            {["Client Gifting", "Team Appreciation", "Diwali & Festive", "Weddings & Ceremonies", "Product Launches", "Year-End Gifting", "Welcome Kits", "Board Meetings"].map((occ) => (
+      {/* ── OCCASIONS (TAG CLOUD) ─────────────────── */}
+      <section className="py-24 bg-brand-blue/5 px-6 lg:px-20">
+        <div className="max-w-[1280px] mx-auto">
+          <p className="text-brand-gold uppercase tracking-widest text-[10px] font-bold mb-12 text-center">Occasions We Serve</p>
+          <div className="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+            {occasions.map((occ) => (
               <span
                 key={occ}
-                style={{
-                  padding: "10px 20px",
-                  border: "1px solid var(--charcoal)",
-                  fontFamily: "var(--font-dm-sans)",
-                  fontSize: 11,
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "var(--charcoal)",
-                }}
+                className="px-8 py-4 border border-brand-blue/10 bg-white text-brand-blue font-dmsans text-[11px] uppercase tracking-widest hover:border-brand-gold transition-colors cursor-default"
               >
                 {occ}
               </span>
@@ -65,81 +86,73 @@ export default function BulkPage() {
         </div>
       </section>
 
-      {/* Enquiry form */}
-      <section style={{ padding: "100px 0", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 720, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Get in Touch</p>
-          <h2 style={{ fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, color: "var(--charcoal)", marginBottom: 48, textAlign: "center" }}>
-            Tell us about your occasion.
-          </h2>
+      {/* ── ENQUIRY FORM ───────────────────────────── */}
+      <section className="py-32 px-6 lg:px-20 max-w-[800px] mx-auto">
+        <div className="text-center mb-16">
+          <p className="text-brand-gold uppercase tracking-widest text-[10px] font-bold mb-4">Concierge</p>
+          <h2 className="font-cormorant text-4xl md:text-5xl text-brand-blue">Tell us about your occasion.</h2>
+        </div>
 
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginBottom: 20 }}>
-            {[["Name", "text", "Your full name"], ["Organisation", "text", "Company or brand name"]].map(([label, type, placeholder]) => (
-              <div key={label as string}>
-                <label style={{ display: "block", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>{label}</label>
+        <div className="bg-white p-10 md:p-16 border border-brand-blue/5 shadow-2xl shadow-brand-blue/5">
+          <form className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {/* Name */}
+              <div className="space-y-2">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Full Name</label>
                 <input
-                  type={type as string}
-                  placeholder={placeholder as string}
-                  style={{
-                    width: "100%",
-                    padding: "14px 16px",
-                    border: "1px solid var(--mist)",
-                    backgroundColor: "transparent",
-                    fontFamily: "var(--font-dm-sans)",
-                    fontSize: 13,
-                    color: "var(--charcoal)",
-                    outline: "none",
-                    boxSizing: "border-box",
-                  }}
+                  type="text"
+                  placeholder="Your name"
+                  className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors"
                 />
               </div>
-            ))}
-          </div>
+              {/* Organisation */}
+              <div className="space-y-2">
+                <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Organisation</label>
+                <input
+                  type="text"
+                  placeholder="Company or brand name"
+                  className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors"
+                />
+              </div>
+            </div>
 
-          <div style={{ marginBottom: 20 }}>
-            <label style={{ display: "block", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>Email</label>
-            <input
-              type="email"
-              placeholder="hello@yourcompany.com"
-              style={{
-                width: "100%",
-                padding: "14px 16px",
-                border: "1px solid var(--mist)",
-                backgroundColor: "transparent",
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: 13,
-                color: "var(--charcoal)",
-                outline: "none",
-                boxSizing: "border-box",
-              }}
-            />
-          </div>
+            {/* Email */}
+            <div className="space-y-2">
+              <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Business Email</label>
+              <input
+                type="email"
+                placeholder="hello@yourcompany.com"
+                className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors"
+              />
+            </div>
 
-          <div style={{ marginBottom: 32 }}>
-            <label style={{ display: "block", fontSize: 10, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 8 }}>Message</label>
-            <textarea
-              rows={5}
-              placeholder="Tell us about your requirements — occasion, quantities, any customisation needs..."
-              style={{
-                width: "100%",
-                padding: "14px 16px",
-                border: "1px solid var(--mist)",
-                backgroundColor: "transparent",
-                fontFamily: "var(--font-dm-sans)",
-                fontSize: 13,
-                color: "var(--charcoal)",
-                outline: "none",
-                resize: "vertical",
-                boxSizing: "border-box",
-              }}
-            />
-          </div>
+            {/* Message */}
+            <div className="space-y-2">
+              <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Requirements</label>
+              <textarea
+                rows={4}
+                placeholder="Quantities, customisation needs, and timelines..."
+                className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors resize-none"
+              />
+            </div>
 
-          <button className="btn-primary" style={{ width: "100%", textAlign: "center" }}>
-            Send Enquiry
-          </button>
+            {/* Submit Button */}
+            <button className="w-full bg-brand-blue text-brand-gold py-6 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-blue/90 hover:shadow-xl transition-all duration-500">
+              Submit Gifting Inquiry
+            </button>
+          </form>
         </div>
       </section>
-    </>
+
+      {/* ── FINAL QUOTE ── */}
+      <section className="py-24 bg-brand-blue text-center">
+        <div className="max-w-2xl mx-auto px-6">
+          <p className="font-cormorant text-3xl md:text-4xl text-white italic leading-relaxed opacity-80">
+            "A gift from the Atelier is more than an object; it is an invitation to pause."
+          </p>
+          <div className="h-px w-12 bg-brand-gold mx-auto mt-10"></div>
+        </div>
+      </section>
+    </main>
   );
 }

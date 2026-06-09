@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 const accessories = [
@@ -12,70 +14,97 @@ const accessories = [
 
 export default function AccessoriesPage() {
   return (
-    <>
-      {/* Header */}
-      <div style={{ paddingTop: 160, paddingBottom: 80, backgroundColor: "#F5EDE0", textAlign: "center" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow" style={{ textAlign: "center" }}>Sustainable Accessories</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(48px, 7vw, 80px)", fontWeight: 300, color: "var(--charcoal)", marginBottom: 20 }}>
-            Every piece, a ritual.
+    <main className="bg-brand-cream min-h-screen">
+      
+      {/* ── HEADER ────────────────────────────────── */}
+      <section className="pt-40 pb-24 bg-white text-center px-6 border-b border-brand-blue/5">
+        <div className="max-w-[1280px] mx-auto">
+          <p className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6">
+            Sustainable Atelier
+          </p>
+          <h1 className="font-cormorant text-6xl md:text-8xl text-brand-blue leading-tight mb-6">
+            Every piece, <br /> <span className="italic">a ritual.</span>
           </h1>
-          <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 18, fontStyle: "italic", color: "var(--charcoal)", opacity: 0.6, maxWidth: 500, margin: "0 auto" }}>
+          <p className="font-cormorant italic text-xl text-brand-blue/60 max-w-lg mx-auto">
             Thoughtfully designed pieces that elevate every sip.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Grid */}
-      <section style={{ padding: "100px 0", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 24 }}>
-            {accessories.map((item, i) => (
-              <div
-                key={item.name}
-                className="product-card"
-                style={{
-                  padding: "40px 32px",
-                  backgroundColor: i % 4 === 0 ? "#F5EDE0" : "var(--cream)",
-                  cursor: "pointer",
-                }}
-              >
-                <div style={{ width: 40, height: 40, borderRadius: "50%", border: "1px solid var(--mist)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: 24 }}>
-                  <span style={{ fontSize: 10, letterSpacing: "0.1em", color: "var(--gold)" }}>{String(i + 1).padStart(2, "0")}</span>
+      {/* ── PRODUCT GALLERY GRID ──────────────────── */}
+      <section className="py-24 px-6 lg:px-20 max-w-[1400px] mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {accessories.map((item, i) => (
+            <div
+              key={item.name}
+              className="group bg-white border border-brand-blue/5 p-10 flex flex-col justify-between hover:shadow-2xl hover:shadow-brand-blue/5 transition-all duration-700 h-full"
+            >
+              <div>
+                {/* Index Number */}
+                <div className="w-10 h-10 rounded-full border border-brand-blue/10 flex items-center justify-center mb-8 group-hover:border-brand-gold transition-colors">
+                  <span className="text-brand-gold text-[10px] font-bold tracking-widest">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
                 </div>
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 22, fontWeight: 400, color: "var(--charcoal)", marginBottom: 12, lineHeight: 1.2 }}>
+                
+                <h3 className="font-cormorant text-2xl text-brand-blue mb-4 group-hover:text-brand-gold transition-colors">
                   {item.name}
+                </h3>
+                <p className="text-brand-blue/60 text-sm leading-relaxed mb-8 font-dmsans">
+                  {item.desc}
                 </p>
-                <p style={{ fontSize: 13, lineHeight: 1.7, color: "var(--charcoal)", opacity: 0.6, marginBottom: 20 }}>{item.desc}</p>
-                <p style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--gold)" }}>{item.material}</p>
               </div>
-            ))}
-          </div>
+
+              <div className="space-y-4 pt-6 border-t border-brand-blue/5">
+                <p className="text-brand-gold uppercase tracking-[0.2em] text-[9px] font-bold italic">
+                  Material: {item.material}
+                </p>
+                <Link 
+                  href="/contact" 
+                  className="text-[10px] uppercase tracking-widest text-brand-blue font-bold border-b border-brand-gold pb-1 inline-block"
+                >
+                  Inquire →
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Philosophy note */}
-      <section style={{ padding: "80px 0", backgroundColor: "var(--charcoal)", textAlign: "center" }}>
-        <div style={{ maxWidth: 640, margin: "0 auto", padding: "0 40px" }}>
-          <p style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 300, color: "var(--cream)", lineHeight: 1.5, marginBottom: 32 }}>
-            "We design for the moment the cup touches your lips — not for the moment it touches a shelf."
+      {/* ── DESIGN PHILOSOPHY (DARK SECTION) ─────── */}
+      <section className="py-32 bg-brand-blue text-brand-cream text-center px-6 relative overflow-hidden">
+        {/* Decorative Circle */}
+        <div className="absolute top-0 right-0 w-96 h-96 bg-brand-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3" />
+        
+        <div className="max-w-2xl mx-auto relative z-10">
+          <p className="font-cormorant text-3xl md:text-4xl font-light leading-relaxed mb-10">
+            "We design for the moment the cup touches your lips — <br />
+            <span className="italic text-brand-gold">not for the moment it touches a shelf.</span>"
           </p>
-          <p style={{ fontSize: 11, letterSpacing: "0.3em", textTransform: "uppercase", color: "var(--gold)" }}>— The Eternal Design Ethos</p>
+          <div className="h-px w-12 bg-brand-gold mx-auto mb-6" />
+          <p className="text-brand-gold uppercase tracking-[0.3em] text-[10px] font-bold">
+            — The Eternal Design Ethos
+          </p>
         </div>
       </section>
 
-      {/* Gifting CTA */}
-      <section style={{ padding: "80px 0", backgroundColor: "#F5EDE0", textAlign: "center" }}>
-        <div style={{ maxWidth: 600, margin: "0 auto", padding: "0 40px" }}>
-          <h2 style={{ fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, color: "var(--charcoal)", marginBottom: 20 }}>
-            Create a custom gifting set.
+      {/* ── GIFTING CTA ───────────────────────────── */}
+      <section className="py-32 bg-brand-cream text-center px-6">
+        <div className="max-w-xl mx-auto">
+          <h2 className="font-cormorant text-4xl text-brand-blue mb-8">
+            Create a custom <br /> <span className="italic">gifting set.</span>
           </h2>
-          <p style={{ fontSize: 14, color: "var(--charcoal)", opacity: 0.65, lineHeight: 1.8, marginBottom: 36 }}>
-            Mix and match teas with accessories for a bespoke gifting experience.
+          <p className="text-brand-blue/60 text-sm leading-relaxed mb-12">
+            Mix and match our curated teas with artisanal accessories for a bespoke gifting experience that leaves a lasting impression.
           </p>
-          <Link href="/bulk" className="btn-primary">Enquire About Gifting</Link>
+          <Link 
+            href="/bulk" 
+            className="bg-brand-blue text-brand-gold px-12 py-5 uppercase tracking-widest text-[11px] font-bold hover:shadow-2xl transition-all"
+          >
+            Enquire About Gifting
+          </Link>
         </div>
       </section>
-    </>
+    </main>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 
 const coffees = [
@@ -26,73 +28,118 @@ const brewNotes = [
 
 export default function CoffeePage() {
   return (
-    <>
-      {/* Header */}
-      <div style={{ paddingTop: 160, paddingBottom: 80, backgroundColor: "var(--charcoal)", textAlign: "center" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p style={{ fontFamily: "var(--font-dm-sans)", fontSize: 10, letterSpacing: "0.35em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 16 }}>Our Collections</p>
-          <h1 style={{ fontFamily: "var(--font-cormorant)", fontSize: "clamp(48px, 7vw, 80px)", fontWeight: 300, color: "var(--cream)", marginBottom: 20 }}>
+    <main className="bg-brand-cream min-h-screen">
+      
+      {/* ── HEADER ────────────────────────────────── */}
+      <section className="pt-40 pb-24 bg-brand-blue text-center px-6 relative overflow-hidden">
+        {/* Subtle Decorative element */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-full bg-gradient-to-b from-brand-gold/20 to-transparent" />
+        
+        <div className="max-w-[1280px] mx-auto relative z-10">
+          <p className="text-brand-gold uppercase tracking-[0.4em] text-[10px] font-bold mb-6">
+            The Eternal Atelier
+          </p>
+          <h1 className="font-cormorant text-6xl md:text-8xl text-white leading-tight mb-6">
             Coffee
           </h1>
-          <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 18, fontStyle: "italic", color: "rgba(255,250,244,0.5)" }}>
+          <p className="font-cormorant italic text-xl text-white/50 max-w-lg mx-auto">
             Crafted for unhurried mornings and meaningful conversations.
           </p>
         </div>
-      </div>
-
-      {/* Coffee cards */}
-      <section style={{ padding: "100px 0", backgroundColor: "var(--cream)" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 32 }}>
-            {coffees.map((coffee) => (
-              <div
-                key={coffee.name}
-                style={{ border: "1px solid var(--mist)", padding: "52px 44px", transition: "border-color 0.3s" }}
-                className="product-card"
-              >
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 32, fontWeight: 300, color: "var(--charcoal)", marginBottom: 8 }}>
-                  {coffee.name}
-                </p>
-                <div style={{ display: "flex", gap: 24, marginBottom: 24, paddingBottom: 24, borderBottom: "1px solid var(--mist)" }}>
-                  {[["Roast", coffee.roast], ["Origin", coffee.origin], ["Notes", coffee.tasting]].map(([label, value]) => (
-                    <div key={label}>
-                      <p style={{ fontSize: 9, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 4 }}>{label}</p>
-                      <p style={{ fontSize: 12, color: "var(--charcoal)", opacity: 0.7 }}>{value}</p>
-                    </div>
-                  ))}
-                </div>
-                <p style={{ fontSize: 14, lineHeight: 1.8, color: "var(--charcoal)", opacity: 0.65, marginBottom: 32 }}>{coffee.desc}</p>
-                <Link href="/contact" style={{ fontSize: 11, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--charcoal)", textDecoration: "none" }}>
-                  Enquire →
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
       </section>
 
-      {/* Brew guide */}
-      <section style={{ padding: "80px 0", backgroundColor: "#F5EDE0" }}>
-        <div style={{ maxWidth: 1280, margin: "0 auto", padding: "0 40px" }}>
-          <p className="eyebrow">Brew Guide</p>
-          <h2 style={{ fontFamily: "var(--font-cormorant)", fontSize: 36, fontWeight: 300, color: "var(--charcoal)", marginBottom: 48 }}>
-            The ritual matters.
-          </h2>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 0, border: "1px solid var(--mist)" }}>
-            {brewNotes.map((note) => (
-              <div key={note.method} style={{ padding: "36px 28px", borderRight: "1px solid var(--mist)" }}>
-                <p style={{ fontFamily: "var(--font-cormorant)", fontSize: 20, color: "var(--charcoal)", marginBottom: 24 }}>{note.method}</p>
-                {[["Temperature", note.temp], ["Ratio", note.ratio], ["Time", note.time]].map(([label, val]) => (
-                  <div key={label} style={{ marginBottom: 12 }}>
-                    <p style={{ fontSize: 9, letterSpacing: "0.25em", textTransform: "uppercase", color: "var(--gold)", marginBottom: 2 }}>{label}</p>
-                    <p style={{ fontSize: 13, color: "var(--charcoal)", opacity: 0.7 }}>{val}</p>
+      {/* ── COFFEE SELECTION ──────────────────────── */}
+      <section className="py-24 px-6 lg:px-20 max-w-[1280px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {coffees.map((coffee) => (
+            <div
+              key={coffee.name}
+              className="bg-white border border-brand-blue/5 p-12 md:p-16 hover:shadow-2xl hover:shadow-brand-blue/5 transition-all duration-700 group"
+            >
+              <h2 className="font-cormorant text-4xl text-brand-blue mb-8 group-hover:text-brand-gold transition-colors">
+                {coffee.name}
+              </h2>
+              
+              {/* Technical Specs Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-8 py-10 border-y border-brand-blue/5 mb-10">
+                {[
+                  ["Roast", coffee.roast],
+                  ["Origin", coffee.origin],
+                  ["Notes", coffee.tasting]
+                ].map(([label, value]) => (
+                  <div key={label} className="space-y-2">
+                    <p className="text-brand-gold uppercase tracking-widest text-[9px] font-bold">{label}</p>
+                    <p className="text-brand-blue/70 text-xs font-dmsans leading-relaxed">{value}</p>
                   </div>
                 ))}
               </div>
+
+              <p className="text-brand-blue/60 text-sm leading-relaxed mb-10 italic">
+                {coffee.desc}
+              </p>
+
+              <Link 
+                href="/contact" 
+                className="inline-flex items-center gap-4 text-brand-blue font-bold text-[10px] uppercase tracking-[0.3em] group/link"
+              >
+                Inquire about roasts 
+                <span className="text-brand-gold group-hover/link:translate-x-2 transition-transform">→</span>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── BREW GUIDE (TECHNICAL ATELIER STYLE) ── */}
+      <section className="py-24 bg-white border-y border-brand-blue/5">
+        <div className="max-w-[1280px] mx-auto px-6 lg:px-20">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <p className="text-brand-gold uppercase tracking-widest text-[10px] font-bold mb-4">The Ritual</p>
+              <h2 className="font-cormorant text-4xl text-brand-blue italic">The method matters.</h2>
+            </div>
+            <p className="text-brand-blue/40 text-xs max-w-xs font-dmsans uppercase tracking-widest">
+              Standardized parameters for the perfect extraction.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-brand-blue/10 divide-y md:divide-y-0 md:divide-x divide-brand-blue/10">
+            {brewNotes.map((note) => (
+              <div key={note.method} className="p-10 hover:bg-brand-cream transition-colors group">
+                <p className="font-cormorant text-2xl text-brand-blue mb-10 group-hover:text-brand-gold transition-colors">{note.method}</p>
+                
+                <div className="space-y-6">
+                  {[
+                    ["Temperature", note.temp],
+                    ["Ratio", note.ratio],
+                    ["Time", note.time]
+                  ].map(([label, val]) => (
+                    <div key={label}>
+                      <p className="text-[9px] uppercase tracking-widest text-brand-gold font-bold mb-1">{label}</p>
+                      <p className="text-sm text-brand-blue/70 font-medium">{val}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
-    </>
+
+      {/* ── FOOTER CTA ───────────────────────────── */}
+      <section className="py-32 bg-brand-cream text-center px-6">
+        <div className="max-w-2xl mx-auto">
+          <h2 className="font-cormorant text-4xl text-brand-blue mb-8 leading-tight">
+            Elevate your workspace <br /> <span className="italic">or morning ritual.</span>
+          </h2>
+          <Link 
+            href="/bulk" 
+            className="inline-block bg-brand-blue text-brand-gold px-12 py-5 text-[11px] uppercase tracking-[0.2em] font-bold hover:shadow-2xl transition-all"
+          >
+            Enquire for Bulk Orders
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }

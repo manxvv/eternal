@@ -9,7 +9,6 @@ const navLinks = [
   { label: "Tea", href: "/tea" },
   { label: "Coffee", href: "/coffee" },
   { label: "Accessories", href: "/accessories" },
-  { label: "Products", href: "/products" },
   { label: "Bulk Buying", href: "/bulk" },
   { label: "Contact", href: "/contact" },
 ];
@@ -27,113 +26,86 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 100,
-        backgroundColor: scrolled ? "rgba(255,250,244,0.96)" : "transparent",
-        borderBottom: scrolled ? "1px solid #E8DDD0" : "none",
-        backdropFilter: scrolled ? "blur(8px)" : "none",
-        transition: "all 0.4s ease",
-        padding: scrolled ? "16px 0" : "28px 0",
-      }}
-    >
-      <div
-        style={{
-          maxWidth: 1280,
-          margin: "0 auto",
-          padding: "0 40px",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-        }}
-      >
-        <Link href="/" style={{ display: "flex", alignItems: "center" }}>
+    <header className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
+      scrolled ? "bg-white/90 backdrop-blur-md border-b border-brand-blue/10 py-4" : "bg-transparent py-8"
+    }`}>
+      <div className="max-w-[1280px] mx-auto px-6 lg:px-10 flex items-center justify-between">
+        
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
           <img
             src="/Eternal logo corp2-01.png"
             alt="Eternal Logo"
-            style={{ height: scrolled ? "40px" : "70px",  transition: "all 0.4s" }}
+            className={`transition-all duration-500 ${scrolled ? "h-10" : "h-16"}`}
           />
         </Link>
 
-        <nav style={{ display: "flex", gap: 28, alignItems: "center" }}>
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="nav-link">
+            <Link 
+              key={link.href} 
+              href={link.href} 
+              className="font-dmsans text-[12px] uppercase tracking-[0.2em] text-brand-blue hover:text-brand-gold transition-colors"
+            >
               {link.label}
             </Link>
           ))}
 
-          <Link
-            href="/cart"
-            style={{ position: "relative", display: "flex", alignItems: "center", color: "var(--charcoal)", textDecoration: "none" }}
-          >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+          {/* Cart Icon */}
+          <Link href="/cart" className="relative group text-brand-blue">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
               <path d="M16 10a4 4 0 01-8 0" />
             </svg>
             {totalItems > 0 && (
-              <span style={{ position: "absolute", top: -6, right: -8, background: "var(--charcoal)", color: "var(--cream)", fontSize: 9, width: 16, height: 16, borderRadius: "50%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily: "var(--font-dm-sans)" }}>
+              <span className="absolute -top-2 -right-2 bg-brand-gold text-brand-blue text-[9px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
                 {totalItems}
               </span>
             )}
           </Link>
 
+          {/* Auth Section */}
           {user ? (
-            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
-              <span style={{ fontSize: 11, color: "var(--gold)", fontFamily: "var(--font-dm-sans)", letterSpacing: "0.1em" }}>
+            <div className="flex items-center gap-6 border-l border-brand-blue/10 pl-6">
+              <span className="text-[11px] font-medium uppercase tracking-widest text-brand-gold">
                 {user.name.split(" ")[0]}
               </span>
-              <button
-                onClick={logout}
-                style={{ background: "none", border: "none", fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase", color: "var(--charcoal)", cursor: "pointer", opacity: 0.6, fontFamily: "var(--font-dm-sans)" }}
-              >
+              <button onClick={logout} className="text-[10px] uppercase tracking-widest text-brand-blue/50 hover:text-brand-blue">
                 Sign Out
               </button>
             </div>
           ) : (
-            <Link href="/login" className="nav-link">Sign In</Link>
-          )}
-        </nav>
-
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{ display: "none", background: "none", border: "none", cursor: "pointer", padding: 8 }} className="mobile-menu-btn" aria-label="Toggle menu">
-          <span style={{ display: "block", width: 24, height: 1, backgroundColor: "var(--charcoal)", marginBottom: 6, transition: "transform 0.3s", transform: menuOpen ? "rotate(45deg) translate(5px, 5px)" : "none" }} />
-          <span style={{ display: "block", width: 24, height: 1, backgroundColor: "var(--charcoal)", marginBottom: 6, opacity: menuOpen ? 0 : 1, transition: "opacity 0.3s" }} />
-          <span style={{ display: "block", width: 24, height: 1, backgroundColor: "var(--charcoal)", transition: "transform 0.3s", transform: menuOpen ? "rotate(-45deg) translate(5px, -5px)" : "none" }} />
-        </button>
-      </div>
-
-      {menuOpen && (
-        <div style={{ backgroundColor: "var(--cream)", borderTop: "1px solid var(--mist)", padding: "24px 40px" }}>
-          {navLinks.map((link) => (
-            <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--charcoal)", textDecoration: "none", padding: "14px 0", borderBottom: "1px solid var(--mist)" }}>
-              {link.label}
-            </Link>
-          ))}
-          <Link href="/cart" onClick={() => setMenuOpen(false)} style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--charcoal)", textDecoration: "none", padding: "14px 0", borderBottom: "1px solid var(--mist)" }}>
-            Cart {totalItems > 0 && `(${totalItems})`}
-          </Link>
-          {user ? (
-            <button onClick={() => { logout(); setMenuOpen(false); }} style={{ display: "block", background: "none", border: "none", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--charcoal)", cursor: "pointer", padding: "14px 0", width: "100%", textAlign: "left" }}>
-              Sign Out ({user.name})
-            </button>
-          ) : (
-            <Link href="/login" onClick={() => setMenuOpen(false)} style={{ display: "block", fontFamily: "var(--font-dm-sans)", fontSize: 13, letterSpacing: "0.15em", textTransform: "uppercase", color: "var(--charcoal)", textDecoration: "none", padding: "14px 0" }}>
+            <Link href="/login" className="text-[11px] uppercase tracking-widest text-brand-blue font-bold border-b border-brand-gold">
               Sign In
             </Link>
           )}
+        </nav>
+
+        {/* Mobile Toggle */}
+        <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-brand-blue">
+          <div className="space-y-1.5">
+            <span className={`block w-6 h-0.5 bg-brand-blue transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-brand-blue transition-all ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-brand-blue transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+          </div>
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden bg-brand-cream border-t border-brand-blue/5 px-10 py-10 space-y-6 animate-fade-in">
+          {navLinks.map((link) => (
+            <Link key={link.href} href={link.href} onClick={() => setMenuOpen(false)} className="block font-cormorant text-2xl text-brand-blue">
+              {link.label}
+            </Link>
+          ))}
+          <Link href="/login" className="block font-dmsans text-xs uppercase tracking-widest text-brand-gold pt-4">
+            Account Login
+          </Link>
         </div>
       )}
-
-      <style>{`
-        @media (max-width: 768px) {
-          .mobile-menu-btn { display: block !important; }
-          nav { display: none !important; }
-        }
-      `}</style>
     </header>
   );
 }
