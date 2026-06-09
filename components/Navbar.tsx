@@ -36,7 +36,7 @@ export default function Navbar() {
           <img
             src="/Eternal logo corp2-01.png"
             alt="Eternal Logo"
-            className={`transition-all duration-500 ${scrolled ? "h-10" : "h-[11rem]"}`}
+            className={`transition-all duration-500 ${scrolled ? "h-10" : "h-[5rem]"}`}
           />
         </Link>
 
@@ -53,7 +53,7 @@ export default function Navbar() {
           ))}
 
           {/* Cart Icon */}
-          <Link href="/cart" className="relative group text-brand-blue">
+          {/* <Link href="/cart" className="relative group text-brand-blue">
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.2">
               <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
               <line x1="3" y1="6" x2="21" y2="6" />
@@ -64,10 +64,10 @@ export default function Navbar() {
                 {totalItems}
               </span>
             )}
-          </Link>
+          </Link> */}
 
           {/* Auth Section */}
-          {user ? (
+          {/* {user ? (
             <div className="flex items-center gap-6 border-l border-brand-blue/10 pl-6">
               <span className="text-[11px] font-medium uppercase tracking-widest text-brand-gold">
                 {user.name.split(" ")[0]}
@@ -80,7 +80,7 @@ export default function Navbar() {
             <Link href="/login" className="text-[11px] uppercase tracking-widest text-brand-blue font-bold border-b border-brand-gold">
               Sign In
             </Link>
-          )}
+          )} */}
         </nav>
 
         {/* Mobile Toggle */}
@@ -101,9 +101,9 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link href="/login" className="block font-dmsans text-xs uppercase tracking-widest text-brand-gold pt-4">
+          {/* <Link href="/login" className="block font-dmsans text-xs uppercase tracking-widest text-brand-gold pt-4">
             Account Login
-          </Link>
+          </Link> */}
         </div>
       )}
     </header>

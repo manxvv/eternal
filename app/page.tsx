@@ -1,13 +1,37 @@
 import Link from "next/link";
 import Image from "next/image";
 
-
 const teas = [
-  { name: "Everyday Assam Tea", desc: "A bold, malty everyday companion.", category: "tea", price: "₹450" },
-  { name: "Majestic Assam Tea", desc: "Rich and full-bodied, from single estates.", category: "tea", price: "₹850" },
-  { name: "Heritage Masala Tea", desc: "A warming blend of hand-selected spices.", category: "tea", price: "₹550" },
-  { name: "Rose Reverie", desc: "Delicate petals, softened by fine Darjeeling.", category: "tea", price: "₹950" },
+  { 
+    name: "Everyday Assam Tea", 
+    desc: "A bold, malty everyday companion.", 
+    category: "tea", 
+    price: "₹450",
+    image: "/everyday_assam_tea_product_front.jpeg" // Added path
+  },
+  { 
+    name: "Majestic Assam Tea", 
+    desc: "Rich and full-bodied, from single estates.", 
+    category: "tea", 
+    price: "₹850",
+    image: "/majestic_assam_tea_product_front.jpeg" // Added path
+  },
+  { 
+    name: "Heritage Masala Tea", 
+    desc: "A warming blend of hand-selected spices.", 
+    category: "tea", 
+    price: "₹550",
+    image: "/everyday_assam_tea.jpeg" // Added path
+  },
+  { 
+    name: "Rose Reverie", 
+    desc: "Delicate petals, softened by fine Darjeeling.", 
+    category: "tea", 
+    price: "₹950",
+    image: "/majestic_assam_tea.jpeg" // Added path
+  },
 ];
+
 
 export default function Home() {
   return (
@@ -90,7 +114,7 @@ export default function Home() {
           <div className="flex justify-between items-end mb-16">
             <div>
               <p className="text-brand-gold uppercase tracking-widest text-[10px] mb-2">The Collection</p>
-              <h2 className="font-cormorant text-4xl">Featured Teas</h2>
+              <h2 className="font-cormorant text-4xl text-brand-blue">Featured Teas</h2>
             </div>
             <Link href="/tea" className="text-brand-blue border-b border-brand-gold pb-1 text-sm hover:text-brand-gold transition-colors">
               View All Collection →
@@ -101,10 +125,14 @@ export default function Home() {
             {teas.map((tea, idx) => (
               <div key={idx} className="group cursor-pointer">
                 <div className="relative aspect-[3/4] bg-brand-cream mb-6 overflow-hidden">
-                  {/* Placeholder for Product Image */}
-                  <div className="absolute inset-0 flex items-center justify-center text-brand-blue/10 font-cormorant text-8xl">
-                    {tea.name[0]}
-                  </div>
+                  
+                  {/* FIX: Replaced the letter placeholder with a real image */}
+                  <img 
+                    src={tea.image} 
+                    alt={tea.name}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+
                   {/* Hover Overlay */}
                   <div className="absolute inset-0 bg-brand-blue/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center p-6 text-center">
                     <p className="text-brand-gold text-xs tracking-widest uppercase mb-4">Quick Add</p>
@@ -113,6 +141,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
+                
                 <h3 className="font-cormorant text-xl mb-1 group-hover:text-brand-gold transition-colors">{tea.name}</h3>
                 <p className="text-brand-blue/40 text-xs mb-3 italic">{tea.desc}</p>
                 <p className="text-brand-blue font-bold text-sm">{tea.price}</p>
@@ -136,12 +165,12 @@ export default function Home() {
             </Link>
           </div>
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-white/5 p-8 border border-white/10 hover:border-brand-gold transition-colors">
-              <h4 className="font-cormorant text-2xl text-brand-gold mb-2">Arabica Roast</h4>
+            <div className="bg-white/5  lg:p-8 p-4 md:p-8 border border-white/10 hover:border-brand-gold transition-colors">
+              <h4 className="font-cormorant text-xl lg:text-2xl md:text-2xl text-brand-gold mb-2">Arabica Roast</h4>
               <p className="text-xs text-white/40">Single Origin · Light</p>
             </div>
-            <div className="bg-white/5 p-8 border border-white/10 hover:border-brand-gold transition-colors">
-              <h4 className="font-cormorant text-2xl text-brand-gold mb-2">Champion Blend</h4>
+            <div className="bg-white/5 lg:p-8 p-4 md:p-8 border border-white/10 hover:border-brand-gold transition-colors">
+              <h4 className="font-cormorant text-xl lg:text-2xl md:text-2xl text-brand-gold mb-2">Champion Blend</h4>
               <p className="text-xs text-white/40">Artisanal · Dark</p>
             </div>
           </div>
