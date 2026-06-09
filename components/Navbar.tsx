@@ -36,7 +36,7 @@ export default function Navbar() {
           <img
             src="/Eternal logo corp2-01.png"
             alt="Eternal Logo"
-            className={`transition-all duration-500 ${scrolled ? "h-10" : "h-16"}`}
+            className={`transition-all duration-500 ${scrolled ? "h-10" : "h-[11rem]"}`}
           />
         </Link>
 
