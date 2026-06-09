@@ -86,9 +86,9 @@ export default function Navbar() {
         {/* Mobile Toggle */}
         <button onClick={() => setMenuOpen(!menuOpen)} className="md:hidden text-brand-blue">
           <div className="space-y-1.5">
-            <span className={`block w-6 h-0.5 bg-brand-blue transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-brand-blue transition-all ${menuOpen ? "opacity-0" : ""}`} />
-            <span className={`block w-6 h-0.5 bg-brand-blue transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-brand-gold transition-all ${menuOpen ? "rotate-45 translate-y-2" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-brand-gold transition-all ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`block w-6 h-0.5 bg-brand-gold transition-all ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`} />
           </div>
         </button>
       </div>

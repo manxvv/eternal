@@ -64,6 +64,10 @@ export default function Home() {
               <Link href="/tea" className="bg-brand-gold text-brand-blue px-10 py-4 hover:bg-white transition-all duration-300 font-medium uppercase tracking-widest text-xs">
                 Explore Teas
               </Link>
+
+                 <Link href="/coffee" className="bg-brand-gold text-brand-blue px-10 py-4 hover:bg-white transition-all duration-300 font-medium uppercase tracking-widest text-xs">
+                Explore Coffee
+              </Link>
               <Link href="/accessories" className="border border-brand-gold text-brand-gold px-10 py-4 hover:bg-brand-gold hover:text-brand-blue transition-all duration-300 font-medium uppercase tracking-widest text-xs">
                 View Accessories
               </Link>
