@@ -1,7 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: [],
+    domains: ['localhost'],
+    
     // local images in /public are always allowed
   },
 };

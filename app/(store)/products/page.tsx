@@ -3,8 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { useAuth } from "@/context/AuthContext";
-import { useCart } from "@/context/CartContext";
+import { useCartStore } from "@/store/useCartStore";
+import { useAuthStore } from "@/store/useAuthStore";
 
 const products = [
   {
@@ -37,8 +37,8 @@ const products = [
 ];
 
 function ProductCard({ product }: { product: typeof products[0] }) {
-  const { user } = useAuth();
-  const { addItem, items } = useCart();
+  const { user } = useAuthStore();
+  const { addItem, items } = useCartStore();
   const [hovered, setHovered] = useState(false);
   const [added, setAdded] = useState(false);
 
@@ -132,7 +132,7 @@ function ProductCard({ product }: { product: typeof products[0] }) {
 }
 
 export default function ProductsPage() {
-  const { user } = useAuth();
+  const { user } = useAuthStore();
   const [filter, setFilter] = useState("all");
 
   const filtered = filter === "all" ? products : products.filter((p) => p.category === filter);
