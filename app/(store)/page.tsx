@@ -105,7 +105,16 @@ function TeaCard({ product, dark = false }: { product: Tea; dark?: boolean }) {
           <p className="text-[9px] italic mb-4 text-[#C4A882]/60">☕ {product.brewTip}</p>
           <div className="flex items-center justify-between">
             <span className="text-[10px] text-white/40">{product.weight}</span>
-            <button className="text-[9px] uppercase tracking-[0.2em] font-bold px-4 py-2.5 bg-[#C4A882] text-[#1A1F2E]">Add to Cart</button>
+             <Link
+        href="https://wa.me/+918377860701" // Replace with your WhatsApp number
+        target="_blank"
+        rel="noopener noreferrer"
+        // className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform hover:scale-110"
+        aria-label="Chat on WhatsApp"
+      >
+
+            <button className="text-[9px] uppercase tracking-[0.2em] font-bold px-4 py-2.5 bg-[#C4A882] text-[#1A1F2E]">Buy Now</button>
+      </Link>
           </div>
         </div>
 
@@ -183,9 +192,17 @@ function CoffeeCard({ coffee }: { coffee: Coffee }) {
             <p className="text-[9px] uppercase tracking-widest mb-1 text-white/20">{coffee.weight}</p>
             <p className="text-2xl font-serif text-white group-hover:text-[#C4A882]">{coffee.price}</p>
           </div>
+           <Link
+        href="https://wa.me/+918377860701" // Replace with your WhatsApp number
+        target="_blank"
+        rel="noopener noreferrer"
+        // className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform hover:scale-110"
+        aria-label="Chat on WhatsApp"
+      >
           <button className="text-[9px] uppercase tracking-[0.2em] font-bold px-6 py-3 border border-[#C4A882] text-[#C4A882] hover:bg-[#C4A882] hover:text-[#1A1F2E] transition-all">
-            Add to Cart
+            Buy Now
           </button>
+          </Link>
         </div>
       </div>
     </div>
@@ -212,7 +229,7 @@ export default function Home() {
 
         <div className="relative z-10 w-full max-w-[1280px] mx-auto px-6 lg:px-16 pt-[120px] pb-20">
           <div className="max-w-lg">
-            <img src="/Eternal_logo_corp2-01-removebg-preview.png" className="h-[120px] md:h-[150px]  w-auto" alt="Logo" />
+            <img src="/Eternal_logo_corp2-01-removebg-preview.png" className="h-[140px] md:h-[160px]  w-auto" alt="Logo" />
             <p className="text-[10px] uppercase tracking-[0.45em] mb-4 text-[#C4A882]">by Eternal Corp · Est. 2024</p>
             
              <h1 className="font-cormorant text-6xl md:text-8xl text-white leading-tight mb-8">
@@ -293,7 +310,7 @@ export default function Home() {
       </section>
 
       {/* PREMIUM TEAS */}
-      <section className="py-24 bg-[#F5EDE0]">
+      {/* <section className="py-24 bg-[#F5EDE0]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
           <div className="mb-14">
             <p className="text-[10px] uppercase tracking-[0.4em] mb-3 text-[#C4A882]">Premium Blends</p>
@@ -303,10 +320,10 @@ export default function Home() {
             {premiumTeas.map(tea => <TeaCard key={tea.id} product={tea} />)}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* FLOWER TEAS (Dark Section) */}
-      <section className="py-24 bg-[#0D1117]">
+      {/* <section className="py-24 bg-[#0D1117]">
         <div className="max-w-[1280px] mx-auto px-6 lg:px-16">
           <div className="mb-14">
             <p className="text-[10px] uppercase tracking-[0.4em] mb-3 text-[#C4A882]">Wellness Infusions</p>
@@ -316,7 +333,7 @@ export default function Home() {
             {flowerTeas.map(tea => <TeaCard key={tea.id} product={tea} dark />)}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* COFFEE SECTION */}
       <section className="py-24 bg-[#1A1F2E]">
@@ -339,7 +356,11 @@ export default function Home() {
           <p className="text-sm text-[#1A1F2E]/60 mb-10">Premium tea collections and sustainable accessories for luxury hospitality and corporate partners.</p>
           <Link 
           // href="/bulk" 
-          href="/"
+href="https://wa.me/+918377860701" // Replace with your WhatsApp number
+        target="_blank"
+        rel="noopener noreferrer"
+        // className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-green-500 text-white shadow-lg transition-transform hover:scale-110"
+        aria-label="Chat on WhatsApp"
           className="inline-block text-[10px] uppercase tracking-widest font-bold px-10 py-4 bg-[#1A1F2E] text-white">Enquire Now</Link>
         </div>
       </section>
