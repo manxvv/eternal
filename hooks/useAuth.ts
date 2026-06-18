@@ -1,55 +1,64 @@
-import { useMutation } from '@tanstack/react-query';
-import api from '@/lib/axios';
-import Cookies from 'js-cookie';
-import { useAuthStore } from '@/store/useAuthStore';
-import { useRouter } from 'next/navigation';
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import api from "@/lib/axios";
+import Cookies from "js-cookie";
+import { useAuthStore } from "@/store/useAuthStore";
+import { useCartStore, mapCartResponse } from "@/store/useCartStore";
+import { CART_KEY } from "@/hooks/useCart";
+import { useRouter } from "next/navigation";
 
 export const useLogin = () => {
-  const setUser = useAuthStore((state) => state.setUser);
+  const setUser = useAuthStore((s) => s.setUser);
+  const setCart = useCartStore((s) => s.setCart);
+  const qc = useQueryClient();
   const router = useRouter();
 
   return useMutation({
     mutationFn: async (credentials: any) => {
-      const { data } = await api.post('/users/login', credentials);
+      const { data } = await api.post("/users/login", credentials);
       return data;
     },
-    onSuccess: (data) => {
-      // 1. Set Cookies for Middleware
-      Cookies.set("is-admin", String(data.isAdmin), { expires: 7, path: '/' });
-      Cookies.set("auth-token", data.token, { expires: 7, path: '/' });
-      Cookies.set("user_data", JSON.stringify(data), { expires: 7, path: '/' });
-      
-      // 2. Set Zustand State
+    onSuccess: async (data) => {
+      Cookies.set("is-admin", String(data.isAdmin), { expires: 7, path: "/" });
+      Cookies.set("auth-token", data.token, { expires: 7, path: "/" });
+      Cookies.set("user_data", JSON.stringify(data), { expires: 7, path: "/" });
       setUser(data);
 
-      // 3. Navigate based on isAdmin key
-      if (data.isAdmin) {
-        router.push('/admin');
-      } else {
-        router.push('/tea');
-      }
+      // Fetch cart immediately after login
+      const cartRes = await api.get("/cart");
+      const mapped = mapCartResponse(cartRes.data);
+      setCart(mapped.items, mapped.totalPrice);
+      qc.setQueryData(CART_KEY, mapped);
+
+      router.push(data.isAdmin ? "/admin" : "/tea");
     },
   });
 };
 
 export const useRegister = () => {
-  const setUser = useAuthStore((state) => state.setUser);
+  const setUser = useAuthStore((s) => s.setUser);
+  // const setCart = useCartStore((s) => s.setCart);
+  const qc = useQueryClient();
   const router = useRouter();
 
   return useMutation({
     mutationFn: async (userData: any) => {
-      const { data } = await api.post('/users/register', userData, {
-        headers: { "X-API-Key": process.env.NEXT_PUBLIC_API_KEY || "" }
+      const { data } = await api.post("/users/register", userData, {
+        headers: { "X-API-Key": process.env.NEXT_PUBLIC_API_KEY || "" },
       });
       return data;
     },
-    onSuccess: (data) => {
-      Cookies.set("is-admin", String(data.isAdmin), { expires: 7, path: '/' });
-      Cookies.set("auth-token", data.token, { expires: 7, path: '/' });
-      Cookies.set("user_data", JSON.stringify(data), { expires: 7, path: '/' });
-      
+    onSuccess: async (data) => {
+      Cookies.set("is-admin", String(data.isAdmin), { expires: 7, path: "/" });
+      Cookies.set("auth-token", data.token, { expires: 7, path: "/" });
+      Cookies.set("user_data", JSON.stringify(data), { expires: 7, path: "/" });
       setUser(data);
-      router.push('/tea');
+
+      // const cartRes = await api.get("/cart");
+      // const mapped = mapCartResponse(cartRes.data);
+      // setCart(mapped.items, mapped.totalPrice);
+      // qc.setQueryData(CART_KEY, mapped);
+
+      router.push("/login");
     },
   });
 };

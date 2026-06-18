@@ -1,10 +1,11 @@
 "use client";
 
+import Link from "next/link";
 import React from "react";
 
 const offerings = [
   { 
-    title: "Premium Tea Collections", 
+    title: "Luxury Tea & Coffee Collections", 
     desc: "Curated selections from our full range, presented in beautiful, sustainable packaging worthy of the recipient." 
   },
   { 
@@ -83,30 +84,43 @@ export default function BulkPage() {
               </span>
             ))}
           </div>
+          <div className="w-full flex justify-center items-center">
+
+  <Link
+              href="/contact">
+
+          <button
+          // onClick={"/contact"}
+          
+          className="w-fit bg-brand-blue text-brand-gold py-6 px-4 mt-10 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-blue/90 hover:shadow-xl transition-all duration-500">
+              Submit Gifting Inquiry
+            </button>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* ── ENQUIRY FORM ───────────────────────────── */}
-      <section className="py-32 px-6 lg:px-20 max-w-[800px] mx-auto">
+      {/* <section className="py-32 px-6 lg:px-20 max-w-[800px] mx-auto">
         <div className="text-center mb-16">
           <p className="text-brand-gold uppercase tracking-widest text-[10px] font-bold mb-4">Concierge</p>
           <h2 className="font-cormorant text-4xl md:text-5xl text-brand-blue">Tell us about your occasion.</h2>
-        </div>
+        </div> */}
 
-        <div className="bg-white p-10 md:p-16 border border-brand-blue/5 shadow-2xl shadow-brand-blue/5">
+        {/* <div className="bg-white p-10 md:p-16 border border-brand-blue/5 shadow-2xl shadow-brand-blue/5">
           <form className="space-y-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8"> */}
               {/* Name */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Full Name</label>
                 <input
                   type="text"
                   placeholder="Your name"
                   className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors"
                 />
-              </div>
+              </div> */}
               {/* Organisation */}
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Organisation</label>
                 <input
                   type="text"
@@ -114,35 +128,33 @@ export default function BulkPage() {
                   className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors"
                 />
               </div>
-            </div>
+            </div> */}
 
             {/* Email */}
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Business Email</label>
               <input
                 type="email"
                 placeholder="hello@yourcompany.com"
                 className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors"
               />
-            </div>
+            </div> */}
 
             {/* Message */}
-            <div className="space-y-2">
+            {/* <div className="space-y-2">
               <label className="block text-[10px] uppercase tracking-widest text-brand-blue/60 font-bold">Requirements</label>
               <textarea
                 rows={4}
                 placeholder="Quantities, customisation needs, and timelines..."
                 className="w-full px-4 py-4 bg-transparent border-b border-brand-blue/10 text-brand-blue font-dmsans text-sm focus:border-brand-gold outline-none transition-colors resize-none"
               />
-            </div>
+            </div> */}
 
             {/* Submit Button */}
-            <button className="w-full bg-brand-blue text-brand-gold py-6 text-[11px] uppercase tracking-[0.3em] font-bold hover:bg-brand-blue/90 hover:shadow-xl transition-all duration-500">
-              Submit Gifting Inquiry
-            </button>
-          </form>
+            
+          {/* </form>
         </div>
-      </section>
+      </section> */}
 
       {/* ── FINAL QUOTE ── */}
       <section className="py-24 bg-brand-blue text-center">

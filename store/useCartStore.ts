@@ -1,106 +1,73 @@
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 
-// Define the shape of a product in the cart
-interface Product {
+interface CartItem {
   _id: string;
   name: string;
   price: number;
-  image: string;
+  images: string[];
   category: string;
-  weight?: string; // e.g., "250g" or "15 Bags"
-}
-
-interface CartItem extends Product {
+  weight?: string;
   quantity: number;
 }
 
 interface CartState {
   items: CartItem[];
-  
-  // Actions
-  addItem: (product: Product) => void;
-  removeItem: (productId: string) => void;
-  updateQuantity: (productId: string, quantity: number) => void;
-  clearCart: () => void;
-
-  // Derived Calculations (Getters)
-  getTotalPrice: () => number;
-  getCartCount: () => number;
-  getShippingFee: () => number;
-  getGrandTotal: () => number;
+  totalPrice: number;
+  // Sync setters — called by react-query mutations/queries
+  setCart: (items: CartItem[], totalPrice: number) => void;
+  clearCartLocal: () => void;
 }
-
-const SHIPPING_THRESHOLD = 999;
-const STANDARD_SHIPPING = 99; // Adjust as per brand strategy
 
 export const useCartStore = create<CartState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       items: [],
+      totalPrice: 0,
 
-      addItem: (product) => {
-        const currentItems = get().items;
-        const existingItem = currentItems.find((item) => item._id === product._id);
-
-        if (existingItem) {
-          set({
-            items: currentItems.map((item) =>
-              item._id === product._id
-                ? { ...item, quantity: item.quantity + 1 }
-                : item
-            ),
-          });
-        } else {
-          set({ items: [...currentItems, { ...product, quantity: 1 }] });
-        }
-      },
-
-      removeItem: (productId) => {
-        set({
-          items: get().items.filter((item) => item._id !== productId),
-        });
-      },
-
-      updateQuantity: (productId, quantity) => {
-        if (quantity <= 0) {
-          get().removeItem(productId);
-          return;
-        }
-        set({
-          items: get().items.map((item) =>
-            item._id === productId ? { ...item, quantity } : item
-          ),
-        });
-      },
-
-      clearCart: () => set({ items: [] }),
-
-      // Calculations
-      getTotalPrice: () => {
-        return get().items.reduce(
-          (acc, item) => acc + item.price * item.quantity,
-          0
-        );
-      },
-
-      getCartCount: () => {
-        return get().items.reduce((acc, item) => acc + item.quantity, 0);
-      },
-
-      getShippingFee: () => {
-        const total = get().getTotalPrice();
-        if (total === 0 || total >= SHIPPING_THRESHOLD) return 0;
-        return STANDARD_SHIPPING;
-      },
-
-      getGrandTotal: () => {
-        return get().getTotalPrice() + get().getShippingFee();
-      },
+      setCart: (items, totalPrice) => set({ items, totalPrice }),
+      clearCartLocal: () => set({ items: [], totalPrice: 0 }),
     }),
     {
-      name: "eternal-cart-storage", // key in localStorage
+      name: "eternal-cart-storage",
       storage: createJSONStorage(() => localStorage),
     }
   )
 );
+
+// ── Shared mapper ──────────────────────────────────────────────
+export function mapCartResponse(data: any): {
+  items: CartItem[];
+  totalPrice: number;
+} {
+  const items: CartItem[] = (data.items ?? []).map((i: any) => ({
+    _id: i.product._id,
+    name: i.product.name,
+    price: i.price,
+    images: i.product.images,
+    category: i.product.category,
+    quantity: i.quantity,
+  }));
+  return { items, totalPrice: data.totalPrice ?? 0 };
+}
+
+const SHIPPING_THRESHOLD = 999;
+const STANDARD_SHIPPING = 99;
+
+// ── Selector hooks (subscribe to slice → re-render only when that slice changes)
+export const useCartItems = () => useCartStore((s) => s.items);
+export const useCartTotalPrice = () => useCartStore((s) => s.totalPrice);
+export const useCartCount = () =>
+  useCartStore((s) => s.items.reduce((acc, i) => acc + i.quantity, 0));
+export const useShippingFee = () =>
+  useCartStore((s) => {
+    const total = s.totalPrice;
+    return total === 0 || total >= SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING;
+  });
+export const useGrandTotal = () =>
+  useCartStore((s) => {
+    const total = s.totalPrice;
+    const shipping =
+      total === 0 || total >= SHIPPING_THRESHOLD ? 0 : STANDARD_SHIPPING;
+    return total + shipping;
+  });

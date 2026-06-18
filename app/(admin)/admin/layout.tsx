@@ -19,7 +19,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
   const menuItems = [
     { name: "Dashboard", href: "/admin" },
     { name: "Products", href: "/admin/products" },
-    // { name: "Coffees", href: "/admin/coffees" },
+    { name: "Orders", href: "/admin/orders" },
     // { name: "Orders", href: "/admin/orders" },
   ];
 

@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import Cookies from 'js-cookie';
+import { useCartStore } from './useCartStore';
 
 interface User {
   _id: string;
@@ -42,6 +43,8 @@ export const useAuthStore = create<AuthState>((set) => ({
     Cookies.remove("auth-token");
     Cookies.remove("user_data");
     set({ user: null, isAuthenticated: false }); // 4. Reset both
+    useCartStore.getState().clearCartLocal();
+
     window.location.href = "/login";
   },
 }));
